@@ -1,0 +1,115 @@
+% !ht TEX root = Practica2-Cuestiones.tex
+
+\documentclass[12pt,a4paper]{report}
+
+% Paquetes útiles
+\usepackage[utf8]{inputenc}    % Acentos
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}    % Idioma español
+\usepackage{graphicx}          % Imágenes
+\usepackage{geometry}          % Márgenes
+\usepackage{setspace}          % Interlineado
+\usepackage{titlesec}          % Controlar formato de capítulos
+\usepackage{hyperref}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{caption}
+\usepackage{float}
+
+%\usepackage{arial}
+% Formato de capítulos: menos espacio arriba
+\titleformat{\chapter}[block]
+  {\normalfont\huge\bfseries}
+  {\thechapter.}{1em}{}
+\titlespacing*{\chapter}{0pt}{-40pt}{20pt}
+
+% Configuración de márgenes
+\geometry{left=2cm,right=2.5cm,top=3cm,bottom=3cm}
+
+\begin{document}
+
+% ==============================
+% PORTADA
+% ==============================
+\begin{titlepage}
+    \centering
+    {\scshape\LARGE Universidad de Murcia\par}
+    \vspace{1cm}
+    {\scshape\Large Facultad de Ingeniería\par}
+    \vspace{3cm}
+    {\Huge\bfseries Práctica 2 - Cuestiones\par}
+    \vspace{1cm}
+    {\Large Sistemas Inteligentes\par}
+    \vfill
+    \begin{flushleft}
+        \textbf{Autor:}\\
+            Andrey Santiago Morales Vicuña \\
+        Grupo: 2.3 \\
+        Correo: asantiago.morales@um.es
+    \end{flushleft}
+    \vspace{1cm}
+
+    \vfill
+    {\large \today\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\chapter{Ejercicios pedidos}
+
+\begin{enumerate}
+
+    \item \textbf{Explicación breve de los tres elementos de los que consta un Sistema basado en reglas (SBR).}
+
+        Un SBR consta de:
+        \begin{itemize}
+        \item Una \textbf{Base de Hechos (BH)} : Es la representación del estado actual de resolución del problema, 
+        contiene hechos verdaderos, tanto datos de entrada como conclusiones inferidas, metas o subproblemas.
+        Los datos de entrada pueden ser introducidos por el usuario, de sistemas externos, iniciales o introducidos durante el proceso. 
+        Se diferencia de la BC porque es dinámico, se modifica su contenido durante el proceso, tras verificar reglas.
+
+        \item Una \textbf{Base de Conocimientos (BC)} : Es estático, agrupa el conjunto de reglas que codifican todo el conocimiento 
+        experto sobre cómo resolver el problema. Una
+        regla consta de dos partes:
+            \begin{itemize}
+                \item Parte izquierda, denominada condición o antecedente.
+                \item Parte derecha, denominada acción o consecuente.
+            \end{itemize}
+        Podemos definir una regla como un par \textit{condición-acción}.
+        
+        \item Un \textbf{Mecanismo de Inferencias (MI)} : Selecciona las reglas que se pueden aplicar y las ejecuta, con el objetivo
+        de obtener alguna conclusión. Son las reglas que podoemos aplicar en cada momento para obtener nuevos conocimientos. Es un mecanismo
+        algorítmico para obtener conclusiones aplicando la BC a loshechos conocidos almacenados en la BH. Las conclusiones se introducen, a su
+         vez, en la BH. Entrada BH y BC, Salida BH' (modificada).
+
+        \end{itemize}
+
+    \item \textbf{Explicación breve de cómo se representa el conocimiento incierto mediante Factores de Certeza.}
+        Segun la medida de la creencia y de la incredulidad, si una es maxima, la otra es 0, no se pueden dar a la vez, son complementarias.
+
+    \item \textbf{¿Qué es lo que mide un factor de certeza FC asociado a un hecho A?}
+        La creencia con la que creemos o dejamos de creer una hipótesis
+
+    \item \textbf{¿Qué es lo que dirías sobre “culpable” con la siguiente información?}
+    \begin{enumerate}
+        \renewcommand{\labelenumi}{\alph{enumi})}
+        \item Hemos obtenido en un proceso de inferencia el hecho “culpable” con FC=0.9 
+            Estoy casi seguro que es culpable
+        \item Hemos obtenido en un proceso de inferencia el hecho “culpable” con FC=0
+            No tengo información para decidir algo.
+        \item Hemos obtenido en un proceso de inferencia el hecho “culpable” con FC=-0.1
+            Estoy a punto de creer que es culpable. No creo casi nada que no sea culpable.
+    \end{enumerate}
+    \item \textbf{¿Para qué se necesita utilizar el CASO 2 durante el proceso de inferencia?}
+        Porque puedo adquirir conocimientos de varios lados y tengo que contrastarlos para un veredicto final.
+
+    \item \textbf{Disponemos de una BC compuesta de un conjunto de reglas Ri las cuales utilizan 4 hechos (A, 
+            B, C, D). Si para un proceso de inferencia nos proporcionan FCs de los hechos A, C y D, ¿Qué 
+            debemos hacer con el hecho B? ¿Por qué? Si lo utilizamos, ¿qué FC se le asignaría? ¿Por qué? }
+
+\end{enumerate}
+
+\end{document}
+
+
