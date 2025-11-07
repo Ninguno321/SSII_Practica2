@@ -86,10 +86,22 @@
         \end{itemize}
 
     \item \textbf{Explicación breve de cómo se representa el conocimiento incierto mediante Factores de Certeza.}
-        Segun la medida de la creencia y de la incredulidad, si una es maxima, la otra es 0, no se pueden dar a la vez, son complementarias.
+    
+        Para tratar de representar hechos cuya fiabilidad o precision es limitada y de que los conocimientos que tenemos 
+        no con absolutamente ciertos, utilizamos los Factores de Certeza, que básicamente son la creencia que tenemos sobre la hipótesis en función
+        de las evidencias o datos conocidos. Estos valores son propocionados por los expertos.
 
     \item \textbf{¿Qué es lo que mide un factor de certeza FC asociado a un hecho A?}
-        La creencia con la que creemos o dejamos de creer una hipótesis
+        
+        MC mide hasta que punto la evidencia apoya la hipótesis.
+        MI mide hasta que punto la evicencia apoya la negación de la hipótesis. Si una tiene el valor máximo, la otra es 0 siempre. Por lo que 
+        el FC está entre -1 y 1.
+        El factor de certeza se define a partir de la medida de la creencia y la de incertidumbre como: 
+        FC = MC - MI 
+
+        Por tanto si FC(A) vale 0,5 podemos decir que creemos 0,5 en que es verdad, y si es -0.5 quiere decir que estoy a la mitad de dejar de creer que 
+        no es verdad para pasar a creer que es verdad (pero sigo creyendo no es verdad) 
+
 
     \item \textbf{¿Qué es lo que dirías sobre “culpable” con la siguiente información?}
     \begin{enumerate}
@@ -107,6 +119,10 @@
     \item \textbf{Disponemos de una BC compuesta de un conjunto de reglas Ri las cuales utilizan 4 hechos (A, 
             B, C, D). Si para un proceso de inferencia nos proporcionan FCs de los hechos A, C y D, ¿Qué 
             debemos hacer con el hecho B? ¿Por qué? Si lo utilizamos, ¿qué FC se le asignaría? ¿Por qué? }
+
+        Usarlo normal pero con el valor que le hemos asignado, le asignamos 0 porque con eso representamos que no tenemos conocimiento 
+        del hecho, no podemos darle otro valor porque de eso se encargan los expertos porque podríamos estar equivocados e influir 
+        en el veredicto final.
 
 \end{enumerate}
 
