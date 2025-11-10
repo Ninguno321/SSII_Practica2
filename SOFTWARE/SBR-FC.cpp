@@ -1,6 +1,3 @@
-
-
-
 /*
 El fichero conteniendo la BC tendrá la siguiente estructura (palabras utilizadas no sensitivas):  
 Nº Reglas 
@@ -42,13 +39,14 @@ si no
         NuevasMetas=ExtraerAntecedentes(R);
         Verificado=Verdadero;
         MIENTRAS noVacio(NuevasMetas) y Verificado hacer
-
-
-
-
 */
 
+#include <iostream>
+using namespace std;
 
+int main(int argc, char * argv[]){
+    cout << "hola" << endl;
+}
 
 
 
