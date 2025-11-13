@@ -39,6 +39,11 @@ si no
         NuevasMetas=ExtraerAntecedentes(R);
         Verificado=Verdadero;
         MIENTRAS noVacio(NuevasMetas) y Verificado hacer
+            Nment=seleccionarMeta(NuevasMetas);
+            Eliminar(NMet,NuevasMetas);
+            Verificado=VERIFICAR(Nmet,BH);
+        si Verificado entonces Añadir(Meta,BH);
+    devolver(Verificado);
 
 ecutable en windows.  - SBR-FC debe ejecutarse en línea de comando con parámetros “BC” y “BH” (en este orden).   - La salida debe generar un fichero (donde el nombre de fichero debe indicar a qué base de 
 hechos y de conocimiento corresponde). Este fichero de salida debe contener:   
@@ -64,21 +69,98 @@ Objetivo, FC=…
 #include <fstream>
 #include <string>
 #include <map>
+#include <vector>
+
 using namespace std;
 
+enum operador {AND, OR};
 
-map<string, double> BaseHechos;
-string OBJETIVO;
+struct Regla {
+    string id;                      //Identificador de la regla
+    vector<string> antecedentes;    //Almacenamiento de los antecedentes
+    operador op;                //Operador usado en la regla, AND u OR
+    string consecuente;             //Almacenamiento del consecuente
+    double fc;                      //Factor de certeza de la regla
+};
+
+
+vector<Regla> BC;                   //Vector de tipo Regla para la base de conocimientos
+map<string, double> BH;             //Map para la base de hechos
+string OBJETIVO;                    //Global para el objetivo
+
+
+/*
+double combinaFC(Regla e1){
+    
+    //CASO 1
+    if (e1.op == AND || e1.op == OR){
+        if (e1.op == AND)
+            return min(BH[e1.antecedentes[0]], BH[e1.antecedentes[1]]);  //Lo estoy haciendo solo para dos pero puede que sean muchos mas antecedentes
+        else return max(BH[e1.antecedentes[0]], BH[e1.antecedentes[1]]);
+    }else if () {
+
+    }
+
+    //CASO 2
+
+
+    //CASO 3
+}
+*/
+
+
+/*R1: Si h2 o h3 Entonces h1, FC=0.5*/
+void rellenaBC(string & linea){
+    //h2, FC=0.3
+    size_t pos_dpuntos = linea.find(':');
+    string id = linea.substr(0, pos_dpuntos);
+    
+    //Falta sacar el operador y los antecedentes.
+
+    size_t pos_entonces = linea.find("Entonces");
+    size_t pos_coma = linea.find(',');
+    string consecuente = linea.substr(pos_entonces+1, pos_coma);
+
+    size_t pos_igual = linea.find('=');
+    string fc = linea.substr(pos_igual+1);
+
+    cout << "Rellenando los valores de la regla" << endl;
+    Regla re;
+    re.id = id;
+    re.antecedentes;
+    re.consecuente = consecuente;
+    re.fc = stod(fc);
+    cout << "Rellenando el vector" << endl;
+    BC.push_back(re);
+    
+    
+    /*
+    vector<string> antecedentes;    //Almacenamiento de los antecedentes
+    operador op;                //Operador usado en la regla, AND u OR
+    string consecuente;             //Almacenamiento del consecuente
+    double fc; 
+    
+    */
+}
 
 //primero tenemos que leer la base de conocimientos y luego la de hechos.
-
+//Está sin modificar, lo hace mal.
+/*
+4
+R1: Si h2 o h3 Entonces h1, FC=0.5
+*/
 void leer_BC(string & BC){
     ifstream archivo(BC); // 1. Crea un objeto ifstream y lo asocia al archivo
     string linea;
+    int n;
+    string basura;
 
     if (archivo.is_open()) { // 2. Comprueba si el archivo se abrió correctamente
-        while (archivo >> linea) { // 3. Lee línea por línea hasta el final
-            cout << "Leído: " << linea << endl;
+        archivo >> n;
+        archivo.ignore(); // ignoramos el salto de linea.
+        for (int i = 0 ;  i < n ; i++){
+            getline(archivo, linea);
+            rellenaBC(linea);
         }
         archivo.close(); // 4. Cierra el archivo
     } else {
@@ -86,7 +168,7 @@ void leer_BC(string & BC){
     }
 }
 
-
+//hace las cosas bien en principio 
 void rellenaBH(string & linea){
     //h2, FC=0.3
     size_t pos_coma = linea.find(',');
@@ -95,11 +177,16 @@ void rellenaBH(string & linea){
     size_t pos_igual = linea.find('=');
     string fc = linea.substr(pos_igual+1);
 
+
+    size_t pos_igual = linea.find('=');
+    string fc = linea.substr(pos_igual+1);
+
     cout << "Rellenando el mapa" << endl;
     cout << hecho << " y "<<fc << endl;
-    BaseHechos[hecho] = stod(fc);
+    BH[hecho] = stod(fc);
 }
 
+//Tambien lo hace bien, según yo.
 void leer_BH(string & BH){
     ifstream archivo(BH); // 1. Crea un objeto ifstream y lo asocia al archivo
     string linea;
